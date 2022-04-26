@@ -26,6 +26,7 @@ export default class extends Component {
       <div className="Pallete">
         {/* navigation */}
         <Slider
+          className="slider"
           defaultValue={level}
           min={100}
           max={900}
