@@ -1,12 +1,12 @@
 import "./App.css";
 import seedColors from "./seedColors.js";
-import Pallete from "./Pallete.js";
+import Palette from "./Palette.js";
 import { generatePalette } from "./colorHelpers.js";
 
 function App() {
   return (
     <div className="App">
-      <Pallete palette={generatePalette(seedColors[3])} />
+      <Palette palette={generatePalette(seedColors[1])} />
     </div>
   );
 }
