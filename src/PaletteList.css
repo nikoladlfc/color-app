@@ -1,0 +1,27 @@
+.PaletteList {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(47, 47, 101);
+  height: 100vh;
+}
+.PaletteList-container {
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.PaletteList-container nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.PaletteList-container nav h3 {
+  color: white;
+}
+
+.PaletteList-palettes {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(3, 30%);
+  gap: 5%;
+}

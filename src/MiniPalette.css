@@ -1,0 +1,26 @@
+.MiniPalette {
+  border-radius: 5px;
+  background-color: white;
+  padding: 0.3rem;
+  cursor: pointer;
+}
+.MiniPalette-colors {
+  display: grid;
+  height: 100px;
+  grid-template-columns: repeat(5, 20%);
+}
+
+.MiniPalette h5 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  font-size: 0.7rem;
+  background-color: white;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}
+.MiniPalette h5 span {
+  margin-right: 0.5rem;
+  font-size: 1rem;
+}

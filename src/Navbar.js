@@ -7,6 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Snackbar from "@mui/material/Snackbar";
 import CloseIcon from "@mui/icons-material/Close";
 import { IconButton } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export default class Navigation extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ export default class Navigation extends Component {
     return (
       <header className="Navbar">
         <div className="logo">
-          <a href="#">reactcolorpicker</a>
+          <Link to="/">reactcolorpicker</Link>
         </div>
         <span>Level {level}</span>
         <div className="slider">
