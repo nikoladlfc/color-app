@@ -1,0 +1,9 @@
+.SingleColorPalette {
+  height: 100vh;
+}
+/* .SingleColorPalette-colors {
+  height: 90%;
+  display: grid;
+  grid-template-columns: repeat(5, 20%);
+  background-color: black;
+} */

@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 
 import "./Palette.css";
 
-export default class extends Component {
+export default class Pallete extends Component {
   constructor(props) {
     super(props);
     this.state = { level: 500, format: "hex" };
@@ -22,7 +22,7 @@ export default class extends Component {
   render() {
     const { colors, paletteName, emoji, id } = this.props.palette;
     const { level, format } = this.state;
-    console.log(colors);
+
     const colorBoxes = colors[level].map((clr) => (
       <ColorBox
         background={clr[format]}
@@ -30,6 +30,7 @@ export default class extends Component {
         key={clr.id}
         paletteId={id}
         colorId={clr.id}
+        showLink={true}
       />
     ));
 
