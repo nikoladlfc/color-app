@@ -27,6 +27,8 @@ const styles = (theme) => ({
     flexDirection: "row",
     height: "64px",
     background: "white",
+    color: "black",
+    alignItems: "center",
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -40,17 +42,29 @@ const styles = (theme) => ({
     marginLeft: 12,
     marginRight: 20,
   },
+
+  navBtns: {
+    marginRight: "1rem",
+  },
+
+  button: {
+    margin: "0 0.5rem",
+  },
 });
 
 class PaletteFormNav extends Component {
   constructor(props) {
     super(props);
+    this.state = { newPaletteName: "", formIsShowing: false };
   }
 
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
     });
+  };
+  showForm = () => {
+    this.setState({ formIsShowing: true });
   };
 
   render() {
@@ -78,18 +92,32 @@ class PaletteFormNav extends Component {
               Create a Palette
             </Typography>
           </Toolbar>
-          <div className="navBtns">
-            <PaletteMetaForm
-              palettes={this.props.palettes}
-              handleSubmit={this.props.handleSubmit}
-            />
+          <div className={classes.navBtns}>
             <Link to="/">
-              <Button variant="contained" color="secondary">
+              <Button
+                variant="contained"
+                color="secondary"
+                className={classes.button}
+              >
                 Go Back
               </Button>
             </Link>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.showForm}
+              className={classes.button}
+            >
+              Save
+            </Button>
           </div>
         </AppBar>
+        {this.state.formIsShowing && (
+          <PaletteMetaForm
+            palettes={this.props.palettes}
+            handleSubmit={this.props.handleSubmit}
+          />
+        )}
       </div>
     );
   }
