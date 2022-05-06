@@ -25,7 +25,6 @@ export default class ColorBox extends Component {
     const copied = this.state.copied;
     const isDarkColor = chroma(background).luminance() <= 0.08;
     const isLightColor = chroma(background).luminance() >= 0.7;
-    console.log(isLightColor);
 
     return (
       <CopyToClipboard text={background} onCopy={this.changeCopyState}>
