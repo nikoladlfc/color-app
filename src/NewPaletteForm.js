@@ -62,7 +62,7 @@ const styles = (theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    height: "100%",
+    height: "80%",
   },
   buttons: {},
 });
