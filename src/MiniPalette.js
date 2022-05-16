@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import DeleteIcon from "@material-ui/icons/Delete";
 import "./MiniPalette.css";
 
 export default class MiniPalette extends Component {
@@ -8,6 +8,12 @@ export default class MiniPalette extends Component {
 
     return (
       <div className="MiniPalette" onClick={this.props.handleClick}>
+        <div className="delete">
+          <DeleteIcon
+            className="DeleteIcon"
+            style={{ transition: "all 0.3s ease-in-out" }}
+          />
+        </div>
         <div className="MiniPalette-colors">
           {colors.map((clr, i) => {
             return <div style={{ background: clr.color }} key={i}></div>;
