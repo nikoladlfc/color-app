@@ -1,5 +1,4 @@
 import React, { Component, useEffect, useRef } from "react";
-import { render } from "react-dom";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -23,7 +22,7 @@ function EmojiPicker(props) {
 class PaletteMetaForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { open: true, newPaletteName: "" };
+    this.state = { stage: "form", newPaletteName: "" };
   }
 
   handleClickOpen = () => {
@@ -33,11 +32,13 @@ class PaletteMetaForm extends Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
     });
   };
+
   componentDidMount() {
     ValidatorForm.addValidationRule("isPaletteNameUnique", (value) =>
       this.props.palettes.every(
@@ -46,40 +47,62 @@ class PaletteMetaForm extends Component {
     );
   }
 
+  savePalette = (emoji) => {
+    const newPalette = {
+      paletteName: this.state.newPaletteName,
+      emoji: emoji.native,
+    };
+
+    this.props.handleSubmit(newPalette);
+  };
+
+  showEmojiPicker = () => {
+    this.setState({ stage: "emoji" });
+  };
+
   render() {
     return (
-      <Dialog open={this.state.open} onClose={this.hideForm}>
-        <ValidatorForm
-          onSubmit={() => this.props.handleSubmit(this.state.newPaletteName)}
+      <div>
+        <Dialog
+          open={this.state.stage === "emoji"}
+          onClose={this.props.hideForm}
         >
-          <DialogTitle>Choose a Palette Name</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Please enter a name for your palette. Make sure it's unique.
-            </DialogContentText>
-            <TextValidator
-              value={this.state.newPaletteName}
-              name="newPaletteName"
-              onChange={this.handleChange}
-              validators={["required", "isPaletteNameUnique"]}
-              fullWidth
-              placeholder="Type name for your palette"
-              margins="normal"
-              errorMessages={[
-                "Enter Palette Name",
-                "Palette name must be unique",
-              ]}
-            />
-            <EmojiPicker onEmojiSelect={console.log} />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.props.hideForm}>Cancel</Button>
-            <Button variant="contained" color="primary" type="submit">
-              Save Palette
-            </Button>
-          </DialogActions>{" "}
-        </ValidatorForm>
-      </Dialog>
+          <DialogTitle>Choose a Palette Emoji</DialogTitle>
+          <EmojiPicker onEmojiSelect={this.savePalette} />
+        </Dialog>
+        <Dialog
+          open={this.state.stage === "form"}
+          onClose={this.props.hideForm}
+        >
+          <ValidatorForm onSubmit={this.showEmojiPicker}>
+            <DialogTitle>Choose a Palette Name</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Please enter a name for your palette. Make sure it's unique.
+              </DialogContentText>
+              <TextValidator
+                value={this.state.newPaletteName}
+                name="newPaletteName"
+                onChange={this.handleChange}
+                validators={["required", "isPaletteNameUnique"]}
+                fullWidth
+                placeholder="Type name for your palette"
+                margins="normal"
+                errorMessages={[
+                  "Enter Palette Name",
+                  "Palette name must be unique",
+                ]}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.props.hideForm}>Cancel</Button>
+              <Button variant="contained" color="primary" type="submit">
+                Save Palette
+              </Button>
+            </DialogActions>{" "}
+          </ValidatorForm>
+        </Dialog>
+      </div>
     );
   }
 }

@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   background-color: rgb(47, 47, 101);
-  height: 100vh;
 }
 .PaletteList-container {
   width: 50%;
