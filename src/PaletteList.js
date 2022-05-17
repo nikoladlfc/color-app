@@ -9,7 +9,7 @@ export default class PaletteList extends Component {
     this.props.history.push(`/palette/${id}`);
   }
   render() {
-    const { palettes } = this.props;
+    const { palettes, deletePalette } = this.props;
 
     return (
       <div className="PaletteList">
@@ -23,6 +23,8 @@ export default class PaletteList extends Component {
               <MiniPalette
                 palettes={plt}
                 key={plt.id}
+                handleDelete={deletePalette}
+                id={plt.id}
                 handleClick={() => this.handleClick(plt.id)}
               />
             ))}

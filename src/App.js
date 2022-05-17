@@ -6,20 +6,30 @@ import { Switch, Route } from "react-router-dom";
 import PaletteList from "./PaletteList";
 import SingleColorPalette from "./SingleColorPalette.js";
 import NewPaletteForm from "./NewPaletteForm";
-
 import "./App.css";
+
 class App extends Component {
   constructor(props) {
     super(props);
     const savedPalettes = JSON.parse(window.localStorage.getItem("palettes"));
     this.state = { palettes: savedPalettes || seedColors };
     this.savePalette = this.savePalette.bind(this);
+    this.deletePalette = this.deletePalette.bind(this);
   }
 
   getColor(id) {
     return this.state.palettes.find((clr) => {
       return clr.id === id;
     });
+  }
+
+  deletePalette(id) {
+    this.setState(
+      (st) => ({
+        palettes: st.palettes.filter((palette) => palette.id !== id),
+      }),
+      this.syncLocalStorage
+    );
   }
 
   savePalette(newPalette) {
@@ -55,7 +65,11 @@ class App extends Component {
             exact
             path="/"
             render={(routeProps) => (
-              <PaletteList palettes={this.state.palettes} {...routeProps} />
+              <PaletteList
+                palettes={this.state.palettes}
+                deletePalette={this.deletePalette}
+                {...routeProps}
+              />
             )}
           />
           <Route
